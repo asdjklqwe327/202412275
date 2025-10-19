@@ -6,26 +6,25 @@
     <title>Document</title>
 </head>
 <body>
-    <h1 id ="counter-output">counter : 0</h1>
+    <h1 id="counter-output"> counter : 0</h1>
     <button id="btn-inc"> inc </button>
     <button id="btn-dec"> dec </button>
 
     <script>
-        var counteroutput = document.getElementById('counter-output')
+        var counterOutput = document.getElementById("counter-output")
         var btnInc = document.getElementById("btn-inc")
         var btnDec = document.getElementById("btn-dec")
-        var counter = 0 // 변수 선언
+        var counter = 0
 
         btnInc.addEventListener('click', ()=> {
             counter = counter + 1
             console.log("click test" + counter)
-            counteroutput.innerText = "counter : " + counter
+            counterOutput.innerText = "Counter : " + counter
         })
-
         btnDec.addEventListener('click', ()=> {
             counter = counter - 1
             console.log("click test" + counter)
-            counteroutput.innerText = "counter : " + counter
+            counterOutput.innerText = "Counter : " + counter
         })
     </script>
 </body>
