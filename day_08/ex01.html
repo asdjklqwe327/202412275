@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="counter-output"> counter : 0</h1>
+    <button id="btn-inc"> inc </button>
+    <button id="btn-dec"> dec </button>
+    <button id="btn-res"> res </button>
+
+    <script>
+        var counterOutput = document.getElementById("counter-output")
+        var btnInc = document.getElementById("btn-inc")
+        var btnDec = document.getElementById("btn-dec")
+        var btnRes = document.getElementById("btn-res")
+        var counter = 0
+
+        btnInc.addEventListener('click', ()=> {
+            counter = counter + 1
+            console.log("click test" + counter)
+            counterOutput.innerText = "Counter : " + counter
+        })
+        btnDec.addEventListener('click', ()=> {
+            counter = counter - 1
+            console.log("click test" + counter)
+            counterOutput.innerText = "Counter : " + counter
+        })
+        btnRes.addEventListener('click', ()=> {
+            counter = 0
+            console.log("reset : " + counter)
+            counterOutput.innerText = "Counter : " +  counter
+            
+        })
+    </script>
+</body>
+</html>
