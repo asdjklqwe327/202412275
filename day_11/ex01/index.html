@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Ex01</title>
+    <style>
+        @import url(main.css);
+    </style>
+</head>
+<body>
+    <h1> Hello </h1>
+    <div class="box-line">
+        <div class="box-1"> 박스 1 </div>
+        <div class="box-1" style="justify-content: center;"> 박스 2 </div>
+        <div class="box-1" style="justify-content: flex-end;"> 박스 3 </div>
+    </div>
+    <div class="box-line">
+        <div class="box-1" style="justify-content: left; align-items: center;"> 박스 4 </div>
+        <div class="box-1" style="justify-content: center; align-items: center;"> 박스 5 </div>
+        <div class="box-1" style="justify-content: flex-end; align-items: center;"> 박스 6</div>
+    </div>
+    <div class="box-line">
+        <div class="box-1" style="justify-content: flex-start; align-items: end;"> 박스 7</div>
+        <div class="box-1" style="justify-content: center; align-items: end;"> 박스 8</div>
+        <div class="box-1" style="justify-content: flex-end; align-items: end;"> 박스 9</div>
+    </div>
+
+    <script type="module">
+        import main from "./index.js"
+        main();
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: blue;
+    color: white;
+    margin: 8px;
+}
+
+.box-line {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+.box-1 {
+    display: flex;
+    width: 128px;
+    height: 64px;
+    background-color: black;
+    color: green;
+    justify-content: left;
+    align-items: flex-start;
+    border: 1px solid white;
+    margin-right: 8px;
+}

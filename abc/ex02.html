@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>네이버 모형 페이지</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f6f7;
+    }
+
+    /* 헤더 */
+    header {
+      background-color: #03c75a;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 50px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 16px;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* 검색 영역 */
+    .search-section {
+      text-align: center;
+      margin: 50px auto;
+    }
+    .search-section input[type="text"] {
+      width: 400px;
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #03c75a;
+      border-radius: 5px;
+    }
+    .search-section button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-left: 5px;
+      background-color: #03c75a;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .search-section button:hover {
+      background-color: #02b050;
+    }
+
+    /* 뉴스 섹션 */
+    .news-section {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 1000px;
+      margin: 50px auto;
+    }
+    .news-item {
+      background-color: white;
+      margin: 10px;
+      padding: 15px;
+      width: 300px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border-radius: 5px;
+    }
+    .news-item h3 {
+      margin-top: 0;
+      font-size: 18px;
+    }
+    .news-item p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    /* 푸터 */
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #888;
+      font-size: 14px;
+      background-color: #f5f6f7;
+      margin-top: 50px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- 헤더 -->
+  <header>
+    <h1>NAVER</h1>
+    <nav>
+      <a href="#">메일</a>
+      <a href="#">카페</a>
+      <a href="#">블로그</a>
+      <a href="#">뉴스</a>
+      <a href="#">쇼핑</a>
+    </nav>
+  </header>
+
+  <!-- 검색 영역 -->
+  <div class="search-section">
+    <input type="text" placeholder="검색어를 입력하세요">
+    <button>검색</button>
+  </div>
+
+  <!-- 뉴스 섹션 -->
+  <div class="news-section">
+    <div class="news-item">
+      <h3>뉴스 제목 1</h3>
+      <p>여기에 뉴스 요약 내용이 들어갑니다. 중요한 소식들을 간략히 표시합니다.</p>
+    </div>
+    <div class="news-item">
+      <h3>뉴스 제목 2</h3>
+      <p>여기에 뉴스 요약 내용이 들어갑니다. 최신 트렌드와 정보를 확인하세요.</p>
+    </div>
+    <div class="news-item">
+      <h3>뉴스 제목 3</h3>
+      <p>여기에 뉴스 요약 내용이 들어갑니다. 다양한 주제의 소식을 제공할 수 있습니다.</p>
+    </div>
+  </div>
+
+  <!-- 푸터 -->
+  <footer>
+    © 2025 NAVER Example Page
+  </footer>
+
+</body>
+</html>

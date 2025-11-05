@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>네이버 클론 - 연습 페이지</title>
+    <!-- CSS 파일은 여기에 연결할 거예요! -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        /* 아주 기본적인 스타일만 여기에 넣어볼게요. */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* 전체 페이지를 중앙 정렬하기 위해 */
+            min-height: 100vh;
+            background-color: #f0f2f5;
+        }
+        .header, .footer {
+            width: 100%;
+            max-width: 1200px; /* 실제 네이버처럼 폭 제한 */
+            background-color: #fff;
+            padding: 10px 20px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        .main-content {
+            width: 100%;
+            max-width: 1200px; /* 실제 네이버처럼 폭 제한 */
+            display: flex;
+            flex-wrap: wrap; /* 내용이 넘칠 경우 다음 줄로 */
+            gap: 20px;
+            padding: 0 20px;
+            flex-grow: 1; /* 메인 콘텐츠가 늘어나게 */
+            margin-bottom: 20px;
+        }
+        .search-area {
+            width: 100%;
+            max-width: 700px; /* 검색창 폭 제한 */
+            text-align: center;
+            margin: 50px auto; /* 중앙 배치 및 위아래 여백 */
+        }
+        .search-input {
+            width: 80%;
+            padding: 15px;
+            border: 2px solid #03c75a; /* 네이버 녹색 */
+            border-radius: 25px;
+            outline: none;
+            font-size: 1.1em;
+        }
+        .search-button {
+            padding: 15px 20px;
+            border: none;
+            background-color: #03c75a;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin-left: 10px;
+        }
+        .section-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            flex: 1; /* 공간을 유연하게 차지 */
+            min-width: 300px; /* 최소 폭 설정 */
+        }
+        .footer {
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+            margin-top: auto; /* 푸터를 하단에 고정 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 💚 헤더 영역 💚 -->
+    <header class="header">
+        <nav>
+            <!-- 상단 메뉴들: 메일, 카페, 블로그, 쇼핑 등 -->
+            <a href="#">메일</a> |
+            <a href="#">카페</a> |
+            <a href="#">블로그</a> |
+            <a href="#">쇼핑</a>
+        </nav>
+        <!-- 로그인/회원가입 버튼, 알림 등은 여기에! -->
+        <div style="float: right;">
+            <a href="#">로그인</a> | <a href="#">회원가입</a>
+        </div>
+    </header>
+
+    <!-- 🔍 검색창 영역 🔍 -->
+    <div class="search-area">
+        <!-- 네이버 로고 이미지 (실제 이미지 경로 필요) -->
+        <h1 style="color: #03c75a; font-size: 3em; margin-bottom: 20px;">NAVER</h1>
+        <form action="#" method="get">
+            <input type="search" class="search-input" placeholder="검색어를 입력해주세요.">
+            <button type="submit" class="search-button">검색</button>
+        </form>
+    </div>
+
+    <!-- 📰 주요 콘텐츠 영역 📰 -->
+    <main class="main-content">
+        <section class="section-box">
+            <h3>뉴스 스탠드</h3>
+            <ul>
+                <li><a href="#">언론사별 뉴스</a></li>
+                <li><a href="#">IT/과학 뉴스</a></li>
+                <li><a href="#">연예 뉴스</a></li>
+            </ul>
+        </section>
+
+        <section class="section-box">
+            <h3>쇼핑</h3>
+            <p>오늘의 특가 상품!</p>
+            <ul>
+                <li><a href="#">BEST 아이템 1</a></li>
+                <li><a href="#">신상 할인!</a></li>
+            </ul>
+        </section>
+
+        <section class="section-box">
+            <h3>실시간 인기 검색어</h3>
+            <ol>
+                <li><a href="#">1. 요즘 유행하는 밈</a></li>
+                <li><a href="#">2. 뤼튼 AI 최고!</a></li>
+                <li><a href="#">3. HTML 완전정복</a></li>
+            </ol>
+        </section>
+
+        <section class="section-box">
+            <h3>날씨 정보</h3>
+            <p>📍 현재 서울 날씨: 맑음, 25°C</p>
+            <p>☁️ 미세먼지: 보통</p>
+        </section>
+    </main>
+
+    <!-- 🦶 푸터 영역 🦶 -->
+    <footer class="footer">
+        <p>&copy; 2025 NAVER Clone (By Your Name)</p>
+        <p><a href="#">이용약관</a> | <a href="#">개인정보처리방침</a> | <a href="#">책임의 한계와 법적고지</a></p>
+    </footer>
+</body>
+</html>
