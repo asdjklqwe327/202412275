@@ -27,7 +27,7 @@ header {
     display: flex;
     padding: 16px;
     /*background-color: yellow;*/
-    color: yellow;
+    /*color: yellow;*/
     justify-content: flex-end;
 }
 
@@ -35,7 +35,7 @@ footer {
     display: flex;
     padding: 16px;
     /*background-color: black;*/
-    color: white;
+    /*color: white;*/
 }
 
 main {
@@ -55,4 +55,9 @@ main {
 .menu-item {
     font-size: 32px;
     margin-bottom: 48px;
+}
+
+.select {
+    background-color: black;
+    color: white;
 }
