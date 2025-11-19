@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>네이버 페이지</title>
+<style>
+  /* 기본 초기화 */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0; font-family: 'Noto Sans KR', sans-serif; background: white; color: #222;
+  }
+  a {
+    color: inherit; text-decoration: none;
+  }
+  button {
+    cursor: pointer; border: none; background: none;
+  }
+  /* 전체 레이아웃: header + main + footer */
+  header, footer {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 24px;
+    border-bottom: 1px solid #eee;
+  }
+  /* 헤더 왼쪽 */
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .icon-btn {
+    font-size: 24px;
+    user-select: none;
+  }
+  .nav-icon {
+    font-size: 22px;
+  }
+  /* 네이버 로고 */
+  .logo {
+    font-weight: 700;
+    font-size: 28px;
+    color: #03c75a;
+    user-select: none;
+  }
+  /* 헤더 중앙 검색창 */
+  .search-container {
+    position: relative;
+    max-width: 600px;
+    flex-grow: 1;
+    margin: 0 20px;
+  }
+  input[type="search"] {
+    width: 100%;
+    padding: 8px 50px 8px 16px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 22px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  input[type="search"]:focus {
+    border-color: #03c75a;
+  }
+  .search-btn {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: #03c75a;
+    width: 36px; height: 36px;
+    display: flex; justify-content: center; align-items: center;
+  }
+  .search-btn svg {
+    fill: white;
+    width: 18px;
+    height: 18px;
+  }
+  /* 헤더 오른쪽 아이콘들 */
+  .header-right {
+    display: flex;
+    gap: 14px;
+    font-size: 22px;
+    color: #555;
+  }
+  .header-right button:hover {
+    color: #03c75a;
+  }
+  /* main 영역: 좌중우 레이아웃 */
+  main {
+    display: flex;
+    max-width: 1200px;
+    margin: 20px auto;
+    gap: 20px;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+  /* 가운데 컨텐츠 컬럼 */
+  .content {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  /* 뉴스스탠드 */
+  .news-stand {
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 16px;
+  }
+  .news-stand h2 {
+    margin: 0 0 12px 0;
+    font-weight: 600;
+    font-size: 18px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 6px;
+    color: #333;
+  }
+  .news-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .news-list a {
+    flex: 1 1 32%;
+    background: #f9f9f9;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #036a07;
+    text-align: center;
+    border: 1px solid #d5e9d5;
+    user-select: none;
+    transition: background-color 0.2s ease;
+  }
+  .news-list a:hover {
+    background-color: #c5ebc2;
+  }
+  /* 쇼핑 영역 */
+  .shopping {
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 16px;
+  }
+  .shopping h2 {
+    margin:0 0 12px;
+    font-size: 18px;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 6px;
+    color: #333;
+  }
+  .shopping-items {
+    display: flex;
+    overflow-x: auto;
+    gap: 12px;
+  }
+  .shopping-item {
+    flex: 0 0 120px;
+    background: #f8f8f8;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    text-align: center;
+    padding: 10px;
+    font-size: 13px;
+    user-select: none;
+  }
+  .shopping-item img {
+    width: 100%; border-radius: 6px;
+    margin-bottom: 6px;
+  }
+  /* 추천 콘텐츠 */
+  .recommend {
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 16px;
+  }
+  .recommend h2 {
+    margin:0 0 12px;
+    font-size: 18px;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 6px;
+    color: #333;
+  }
+  .recommend-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .recommend-item {
+    background: #f8f8f8;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    font-size: 14px;
+    user-select: none;
+  }
+  .recommend-item img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+  }
+  .recommend-item p {
+    margin: 8px;
+    line-height: 1.2;
+  }
+  /* 오른쪽 사이드바 */
+  aside.sidebar {
+    flex: 0.75;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 280px;
+  }
+  /* 로그인 박스 */
+  .login-box {
+    border: 1px solid #03c75a;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+  }
+  .login-box h3 {
+    margin-top: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #03c75a;
+  }
+  .login-box button {
+    margin-top: 12px;
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 22px;
+    background-color: #03c75a;
+    color: white;
+    font-weight: 700;
+  }
+  .login-box p {
+    margin-top: 10px;
+    font-size: 12px;
+  }
+  .login-box p a {
+    color: #03c75a;
+    margin: 0 6px;
+  }
+  /* 광고, 날씨, 주가 등 정보 박스 */
+  .info-box {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: white;
+    padding: 16px;
+    font-size: 14px;
+    user-select: none;
+  }
+  .info-box h4 {
+    margin: 0 0 10px;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 6px;
+  }
+  /* 푸터 스타일 */
+  footer {
+    padding: 20px 16px;
+    font-size: 12px;
+    color: #888;
+    border-top: 1px solid #eee;
+    text-align: center;
+  }
+  /* 스크롤바 커스텀 (쇼핑, 뉴스 영역 등에서 가로 스크롤) */
+  .shopping-items::-webkit-scrollbar {
+    height: 8px;
+  }
+  .shopping-items::-webkit-scrollbar-thumb {
+    background-color: #b0d5a4;
+    border-radius: 4px;
+  }
+  .shopping-items::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  /* 반응형 최소 기본 */
+  @media (max-width: 1024px) {
+    main {
+      flex-direction: column;
+      padding: 0 10px;
+    }
+    aside.sidebar {
+      flex: unset;
+      width: 100%;
+      order: 1;
+    }
+    .content {
+      order: 2;
+    }
+    .recommend-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-left">
+    <button class="icon-btn" aria-label="메뉴 열기">≡</button>
+    <div class="logo" aria-label="네이버 홈">N</div>
+  </div>
+  <div class="search-container">
+    <input type="search" class="search-input" placeholder="네이버에서 검색" aria-label="검색어 입력" />
+    <button class="search-btn" aria-label="검색">
+      <svg viewBox="0 0 24 24"><path d="M21 20l-5.59-5.59A7.97 7.97 0 0016 10a8 8 0 10-8 8 7.97 7.97 0 004.41-1.59L20 21z"/></svg>
+    </button>
+  </div>
+  <div class="header-right">
+    <button class="nav-icon" aria-label="쪽지">✉️</button>
+    <button class="nav-icon" aria-label="알림">🔔</button>
+    <button class="nav-icon" aria-label="장바구니">🛒</button>
+  </div>
+</header>
+<main>
+  <div class="content">
+
+    <section class="news-stand" aria-label="뉴스 스탠드">
+      <h2>뉴스 스탠드</h2>
+      <div class="news-list">
+        <a href="#">연합뉴스</a>
+        <a href="#">채널A</a>
+        <a href="#">문화일보</a>
+        <a href="#">한국경제</a>
+        <a href="#">뉴스1</a>
+        <a href="#">스포츠서울</a>
+        <a href="#">아이뉴스24</a>
+        <a href="#">머니투데이</a>
+        <a href="#">스탠드뉴스</a>
+      </div>
+    </section>
+
+    <section class="shopping" aria-label="쇼핑">
+      <h2>쇼핑</h2>
+      <div class="shopping-items">
+        <div class="shopping-item">
+          <img src="https://via.placeholder.com/120x120" alt="상품 이미지1" />
+          <p>따뜻한 겨울 패딩</p>
+        </div>
+        <div class="shopping-item">
+          <img src="https://via.placeholder.com/120x120" alt="상품 이미지2" />
+          <p>수면 솔루션</p>
+        </div>
+        <div class="shopping-item">
+          <img src="https://via.placeholder.com/120x120" alt="상품 이미지3" />
+          <p>미끄럼 방지 슬리퍼</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="recommend" aria-label="추천 콘텐츠">
+      <h2>추천 콘텐츠</h2>
+      <div class="recommend-list">
+        <div class="recommend-item">
+          <img src="https://via.placeholder.com/300x100" alt="추천 콘텐츠 1" />
+          <p>1년 동안 공영자전거 무료로 이용한 후기</p>
+        </div>
+        <div class="recommend-item">
+          <img src="https://via.placeholder.com/300x100" alt="추천 콘텐츠 2" />
+          <p>멀지기 주인공 엑사이다 어썸!</p>
+        </div>
+        <div class="recommend-item">
+          <img src="https://via.placeholder.com/300x100" alt="추천 콘텐츠 3" />
+          <p>이 포스트는 쿠팡 파트너스 활동의 일환입니다</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <aside class="sidebar" aria-label="사이드바">
+    <div class="login-box" role="region" aria-labelledby="login-title">
+      <h3 id="login-title">네이버 로그인</h3>
+      <button class="login-btn">로그인</button>
+      <p><a href="#">아이디 찾기</a> · <a href="#">회원가입</a></p>
+    </div>
+
+    <div class="info-box" aria-label="광고 배너">
+      <h4>광고</h4>
+      <p>삼성전자 아파트와 아르테임 더 숲이 만난다.</p>
+    </div>
+
+    <div class="info-box" aria-label="날씨 정보">
+      <h4>날씨</h4>
+      <p>현재 7℃ 맑음</p>
+      <p>10시 12시 14시 ~</p>
+    </div>
+
+    <div class="info-box" aria-label="주가 정보">
+      <h4>주가</h4>
+      <p>코스닥 896.71 ▲1.19 (0.13%)</p>
+    </div>
+  </aside>
+</main>
+<footer>
+  네이버 (c) 2025 네이버 주식회사. 판권 소유.
+</footer>
+</body>
+</html>

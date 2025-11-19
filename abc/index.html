@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>네이버 클론 - 미니 버전</title>
+<style>
+  /* 기본 초기화 및 박스 모델 */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0; font-family: 'Noto Sans KR', sans-serif; background: #fff; color:#333;
+  }
+  a {
+    text-decoration: none; color: inherit;
+  }
+  /* 헤더 스타일 */
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px; border-bottom: 1px solid #ddd;
+  }
+  .header-left, .header-center, .header-right {
+    display: flex; align-items: center;
+  }
+  .nav-icon {
+    width: 24px; height: 24px; margin-right: 12px; cursor:pointer;
+  }
+  /* 네이버 로고 */
+  .logo {
+    font-weight: 700; font-size: 28px; color: #03c75a; user-select:none;
+    margin-right: 24px;
+  }
+  /* 검색창 */
+  .search-box {
+    position: relative;
+    flex: 1;
+    max-width: 560px;
+  }
+  .search-input {
+    width: 100%; padding: 8px 44px 8px 16px;
+    font-size: 16px; border-radius: 22px; border: 1px solid #ddd;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  .search-input:focus {
+    border-color: #03c75a;
+  }
+  .search-btn {
+    position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+    background: #03c75a; border:none; border-radius: 50%;
+    width: 36px; height: 36px;
+    cursor: pointer;
+    display: flex; justify-content: center; align-items: center;
+  }
+  .search-btn svg {
+    fill: white; width: 18px; height: 18px;
+  }
+  /* 상단 아이콘 메뉴 */
+  .top-menu {
+    margin-left: 24px;
+    display: flex; gap: 16px;
+  }
+  .top-menu button {
+    background: none; border: none; cursor: pointer; font-size: 14px;
+    color: #666;
+    padding: 6px 8px;
+    border-radius: 12px;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .top-menu button:hover {
+    background-color: #e5f5e6;
+    color: #03c75a;
+  }
+  /* 메인 콘텐츠 영역 */
+  main {
+    max-width: 1200px; margin: 20px auto; padding: 0 20px;
+    display: flex; gap: 20px;
+  }
+  /* 뉴스 스탠드, 쇼핑 등 각 섹션 카드 */
+  .section {
+    background: #fafafa;
+    border: 1px solid #e1e2e3;
+    border-radius: 8px;
+    padding: 16px;
+    flex: 1;
+    min-height: 400px;
+    overflow: auto;
+  }
+  /* 오른쪽 사이드바 */
+  .sidebar {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  /* 로그인 박스 */
+  .login-box {
+    border: 1px solid #03c75a;
+    border-radius: 6px;
+    padding: 20px;
+    text-align: center;
+  }
+  .login-btn {
+    background-color: #03c75a;
+    color: white;
+    border: none;
+    padding: 10px 0;
+    width: 100%;
+    border-radius: 22px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 12px;
+  }
+  /* Footer */
+  footer {
+    background: #fafafa;
+    padding: 30px 20px;
+    text-align: center; color: #999; font-size: 14px;
+    border-top: 1px solid #ddd;
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-left">
+    <div class="logo" aria-label="네이버 홈으로 이동">N</div>
+    <nav class="top-menu" aria-label="상단 메뉴">
+      <button>메일</button>
+      <button>카페</button>
+      <button>블로그</button>
+      <button>스토어</button>
+      <button>뉴스</button>
+    </nav>
+  </div>
+  <div class="header-center">
+    <div class="search-box" role="search">
+      <input type="search" class="search-input" placeholder="검색어를 입력하세요" aria-label="검색어 입력" />
+      <button class="search-btn" aria-label="검색">
+        <svg viewBox="0 0 24 24"><path d="M21 20l-5.59-5.59A7.97 7.97 0 0016 10a8 8 0 10-8 8 7.97 7.97 0 004.41-1.59L20 21z"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="header-right">
+    <button aria-label="쪽지함" class="nav-icon">✉️</button>
+    <button aria-label="알림" class="nav-icon">🔔</button>
+    <button aria-label="장바구니" class="nav-icon">🛒</button>
+  </div>
+</header>
+<main>
+  <section class="section" aria-label="뉴스 스탠드">
+    <h2>뉴스 스탠드</h2>
+    <ul>
+      <li><a href="#">연합뉴스</a></li>
+      <li><a href="#">채널A</a></li>
+      <li><a href="#">문화일보</a></li>
+      <li><a href="#">한국경제</a></li>
+      <li><a href="#">뉴스1</a></li>
+    </ul>
+  </section>
+  <section class="section" aria-label="쇼핑">
+    <h2>쇼핑</h2>
+    <p>다양한 쇼핑 콘텐츠...</p>
+  </section>
+  <section class="section" aria-label="추천 콘텐츠">
+    <h2>추천 콘텐츠</h2>
+    <p>흥미로운 추천 영상과 글을 제공합니다.</p>
+  </section>
+  <aside class="sidebar" aria-label="사이드바 및 로그인 영역">
+    <div class="login-box" role="region" aria-labelledby="login-title">
+      <h3 id="login-title">네이버 로그인</h3>
+      <button class="login-btn">로그인</button>
+      <p><a href="#">아이디 찾기</a> · <a href="#">회원가입</a></p>
+    </div>
+  </aside>
+</main>
+<footer>
+  © NAVER Corp. All rights reserved.
+</footer>
+<script>
+  // 검색창 클릭/포커스에 따른 스타일 변화
+  const searchInput = document.querySelector('.search-input');
+  searchInput.addEventListener('focus', () => {
+    searchInput.style.borderColor = '#03c75a';
+  });
+  searchInput.addEventListener('blur', () => {
+    searchInput.style.borderColor = '#ddd';
+  });
+
+  // 상단 메뉴 버튼에 마우스오버 효과는 CSS로 담당
+</script>
+</body>
+</html>
