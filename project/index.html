@@ -37,15 +37,15 @@
       <section class="news-stand" aria-label="뉴스 스탠드">
         <h2>뉴스 스탠드</h2>
         <div class="news-list">
-          <a href="link">연합뉴스</a>
-          <a href="link">채널A</a>
-          <a href="link">문화일보</a>
-          <a href="link">한국경제</a>
-          <a href="link">뉴스1</a>
-          <a href="link">스포츠서울</a>
-          <a href="link">아이뉴스24</a>
-          <a href="link">머니투데이</a>
-          <a href="link">스탠드뉴스</a>
+          <a href="https://www.yna.co.kr/" target="_blank">연합뉴스</a>
+          <a href="https://ichannela.com/" target="_blank">채널A</a>
+          <a href="https://www.munhwa.com/" target="_blank">문화일보</a>
+          <a href="https://www.hankyung.com/" target="_blank">한국경제</a>
+          <a href="https://www.news1.kr/" target="_blank">뉴스1</a>
+          <a href="https://www.sportsseoul.com/" target="_blank">스포츠서울</a>
+          <a href="https://www.inews24.com/" target="_blank">아이뉴스24</a>
+          <a href="https://www.mt.co.kr/" target="_blank">머니투데이</a>
+          <a href="https://newsstand.naver.com/?list=ct1&pcode=047" target="_blank">스탠드뉴스</a>
         </div>
       </section>
 
@@ -53,18 +53,31 @@
         <h2>전주대학교</h2>
         <div class="jju-items">
           <div class="jju-item">
-            <img src="jjulogo.png" alt="전주대학교" />
+            <a href="https://www.jj.ac.kr/jj/index.do" target="_blank">
+              <img src="jjulogo.png" alt="전주대학교" class="my-image">
+            </a>
             <p>전주대학교</p>
           </div>
 
           <div class="jju-item">
-            <img src="cyber.png" alt="전주대학교 사이버캠퍼스" />
+            <a href="https://cyber.jj.ac.kr/" target="_blank">
+              <img src="cyber.png" alt="전주대학교 사이버캠퍼스" class="my-image"/>
+            </a>
             <p>사이버 캠퍼스</p>
           </div>
 
           <div class="jju-item">
-            <img src="jju-instar.png" alt="전주대학교 인스타" />
-            <p>전주대학교 인스타</p>
+            <a href="https://instar.jj.ac.kr/" target="_blank">
+              <img src="jju-instar.png" alt="전주대학교 인스타" class="my-image">
+            </a>
+            <p>전주대학교<br>인스타</p>
+          </div>
+
+          <div class="jju-item">
+            <a href="https://onstar.jj.ac.kr/" target="_blank">
+              <img src="jju-onstar.png" alt="전주대학교온스타" class="my-image">
+            </a>
+            <p>전주대학교<br>온스타</p>
           </div>
         </div>
       </section>
@@ -110,11 +123,42 @@
         <p>현재 7℃ 맑음</p>
         <p>10시 12시 14시 ~</p>
       </div>
+      
+         <!-- 💡 계산기 부분 (초기 상태) -->
+      <div class="calculator-box info-box" aria-label="계산기">
+  <h4>계산기</h4>
+  <div id="calc-display" class="calculator-display">0</div>
+  <div class="calculator-buttons">
+    <!-- 1행 -->
+    <button class="calc-btn btn-clear">C</button>
+    <button class="calc-btn btn-operator" data-operator="/">/</button>
+    <button class="calc-btn btn-operator" data-operator="*">*</button>
+    <button class="calc-btn btn-operator" data-operator="-">-</button>
 
-      <div class="info-box" aria-label="주가 정보">
-        <h4>주가</h4>
-        <p>~~~~~~~~</p>
-      </div>
+    <!-- 2행 -->
+    <button class="calc-btn btn-number" data-number="7">7</button>
+    <button class="calc-btn btn-number" data-number="8">8</button>
+    <button class="calc-btn btn-number" data-number="9">9</button>
+    <button class="calc-btn btn-operator btn-plus" data-operator="+">+</button> <!-- + 버튼에 btn-plus 클래스 추가 -->
+
+    <!-- 3행 -->
+    <button class="calc-btn btn-number" data-number="4">4</button>
+    <button class="calc-btn btn-number" data-number="5">5</button>
+    <button class="calc-btn btn-number" data-number="6">6</button>
+    <!-- 여기에 + 버튼의 공간이 비어있음 (CSS에서 rowspan으로 처리) -->
+
+    <!-- 4행 -->
+    <button class="calc-btn btn-number" data-number="1">1</button>
+    <button class="calc-btn btn-number" data-number="2">2</button>
+    <button class="calc-btn btn-number" data-number="3">3</button>
+    <button class="calc-btn btn-equals btn-equal" data-operator="=">=</button> <!-- = 버튼에 btn-equal 클래스 추가 -->
+
+    <!-- 5행 -->
+    <button class="calc-btn btn-number btn-zero" data-number="0">0</button> <!-- 0 버튼에 btn-zero 클래스 추가 -->
+    <button class="calc-btn btn-number btn-decimal" data-number=".">.</button>
+    <!-- 여기에 = 버튼의 공간이 비어있음 (CSS에서 rowspan으로 처리) -->
+  </div>
+</div>
     </aside>
   </main>
 

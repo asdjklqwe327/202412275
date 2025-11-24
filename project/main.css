@@ -138,6 +138,13 @@ main {
   background-color: #c5ebc2;
 }
 /* 전주대학교 */
+
+.my-image {
+  width: 200px;
+  height: auto;
+  object-fit: cover; /*이미지가 잘리더라도 영역을 꽉 채우도록*/  
+}
+
 .jju {
   background: white;
   border-radius: 8px;
@@ -157,6 +164,7 @@ main {
   overflow-x: auto;
   gap: 12px;
 }
+
 .jju-item {
   flex: 0 0 120px;
   background: #f8f8f8;
@@ -166,8 +174,12 @@ main {
   padding: 10px;
   font-size: 13px;
   user-select: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-.jju-item img {
+
+.btn-clear img {
   width: 100%; border-radius: 6px;
   margin-bottom: 6px;
 }
@@ -279,6 +291,90 @@ footer {
 }
 .jju-items::-webkit-scrollbar-track {
   background: transparent;
+}
+
+/* 💡 계산기 스타일 추가 (초기 상태) */
+.calculator-box {
+  /* info-box에 이미 border와 background가 있으니 여기선 추가하지 않아도 돼 */
+}
+
+.calculator-box h4 {
+  margin-bottom: 15px; /* 타이틀 아래 간격 넓히기 */
+}
+
+.calculator-display {
+  background-color: #eee;
+  color: #333;
+  font-size: 2em;
+  padding: 10px 15px;
+  border-radius: 6px;
+  text-align: right;
+  margin-bottom: 15px; /* 원래대로 15px로 복원 */
+  min-height: 40px; /* 너무 짧아지지 않도록 최소 높이 설정 */
+  overflow: hidden; /* 숫자 넘치면 숨김 */
+  white-space: nowrap; /* 숫자가 길어져도 줄바꿈되지 않게 */
+  line-height: 1.5; /* 텍스트가 중앙에 오도록 */
+}
+
+.calculator-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4열로 버튼 배치 */
+  gap: 8px; /* 버튼 간격 */
+}
+
+.calc-btn {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px 0;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  user-select: none; /* 드래그 방지 */
+}
+
+.calc-btn:hover {
+  background-color: #e0e0e0;
+  border-color: #ccc;
+}
+
+.btn-operator {
+  background-color: #d8f1e0; /* 연한 초록색 */
+  color: #03c75a;
+}
+
+.btn-operator:hover {
+  background-color: #c5ebc2;
+}
+
+/* 💡 레이아웃 조정을 위한 특정 버튼 스타일 */
+.btn-plus { /* '+' 버튼이 세로로 2칸을 차지하도록 */
+  grid-row: span 2;
+  /* (색상은 btn-operator를 따름) */
+}
+
+.btn-equal { /* '=' 버튼이 세로로 2칸을 차지하도록 */
+  grid-row: span 2;
+  background-color: #03c75a; /* 네이버 메인 색상 */
+  color: white;
+}
+
+.btn-equal:hover {
+  background-color: #02b050;
+}
+
+.btn-zero { /* '0' 버튼이 가로로 2칸을 차지하도록 */
+  grid-column: span 2;
+}
+
+.btn-clear {
+  background-color: #f7a097; /* 클리어 버튼은 붉은 계열 */
+  color: white;
+}
+
+.btn-clear:hover {
+  background-color: #eb7c71;
 }
 
 @media (max-width: 1024px) {
