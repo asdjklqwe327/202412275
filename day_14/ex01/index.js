@@ -5,6 +5,7 @@ export default async function main() {
     const mainMenu = document.querySelector('#main-menu')
     // const newGame = document.querySelector('')
     const creditScreen = document.querySelector('#credit-screen')
+    const optionScreen = document.querySelector('#option-screen')
     let currentScreen = "mainMenu"
 
     
@@ -17,9 +18,10 @@ export default async function main() {
     menuitems[currentIndex].classList.add("select")
 
     window.addEventListener("keydown", (e) => {
-        menuitems[currentIndex].classList.remove('select')
+        const backButton = document.querySelectorAll(".back-button")
 
         if(currentScreen == "mainMenu") {
+            menuitems[currentIndex].classList.remove('select')
 
             console.log(e.key)
             if(e.key == "ArrowUp") {
@@ -41,6 +43,12 @@ export default async function main() {
                     creditScreen.classList.remove('hide')
                     currentScreen = "creditScreen"
                 }
+
+                else if(select_action == 'option') {
+                    mainMenu.classList.add('hide')
+                    optionScreen.classList.remove('hide')
+                    currentScreen = "optionScreen"
+                }
             }
 
             console.log(currentIndex)
@@ -60,6 +68,17 @@ export default async function main() {
             }
         }
 
+        else if(currentScreen == "optionScreen") {
+
+            console.log('option screen')
+
+            if(e.key == "Enter") {
+
+                optionScreen.classList.add('hide')
+                mainMenu.classList.remove('hide')
+                currentScreen = "mainMenu"
+            }
+        }
         
 
     })
