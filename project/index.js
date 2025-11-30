@@ -1,84 +1,107 @@
 export default async function main() {
-    // ======== 1. 검색창 포커스 이벤트 ========
+    // 검색창 focus/blur 스타일 변경 기능
     const searchInput = document.querySelector('.search-input'); 
+    searchInput.addEventListener('focus', () => { searchInput.style.borderColor = '#03c75a'; });
+    searchInput.addEventListener('blur', () => { searchInput.style.borderColor = '#ddd'; });
 
-    searchInput.addEventListener('focus', () => {
-        searchInput.style.borderColor = '#03c75a';
+    // 뉴스 스탠드 메뉴 탭 기능 (종합/스포츠/엔터)
+    const newsMenuButtons = document.querySelectorAll('.news-menu-btn');
+    const newsListGeneral = document.querySelector('.news-list-general');
+    const newsListSports = document.querySelector('.news-list-sports');
+    // 👇👇👇 여기에 엔터테인먼트 뉴스 목록 변수 추가! 👇👇👇
+    const newsListEntertainment = document.querySelector('.news-list-entertainment');
+
+    function showNewsList(type) {
+        // 모든 메뉴 버튼에서 'active' 클래스 제거
+        newsMenuButtons.forEach(button => button.classList.remove('active'));
+        // 현재 선택된 버튼에 'active' 클래스 추가
+        const activeButton = document.querySelector(`.news-menu-btn[data-news-type="${type}"]`);
+        if (activeButton) activeButton.classList.add('active');
+
+        // 모든 뉴스 목록 숨기기
+        newsListGeneral.style.display = 'none';
+        newsListSports.style.display = 'none';
+        newsListEntertainment.style.display = 'none'; // 👇 엔터테인먼트 뉴스도 숨기기
+
+        // 선택된 뉴스 타입에 해당하는 목록만 보여주기
+        if (type === 'general') {
+            newsListGeneral.style.display = 'grid';
+        } else if (type === 'sports') {
+            newsListSports.style.display = 'grid';
+        } else if (type === 'entertainment') { // 👇 엔터테인먼트 뉴스 타입 처리!
+            newsListEntertainment.style.display = 'grid';
+        }
+    }
+
+    // 각 메뉴 버튼에 클릭 이벤트 리스너 추가
+    newsMenuButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const newsType = e.target.dataset.newsType; // 버튼의 data-news-type 값 가져오기
+            showNewsList(newsType); // 해당 타입의 뉴스 목록 표시
+        });
     });
 
-    searchInput.addEventListener('blur', () => {
-        searchInput.style.borderColor = '#ddd';
-    });
+    // 페이지 로드 시 기본으로 '종합' 뉴스 스탠드를 표시
+    showNewsList('general');
 
-    // ======== 2. 계산기 기능 ========
-    const calcDisplay = document.getElementById('calc-display'); // 계산기 화면 (결과 표시되는 곳)
-    const numberButtons = document.querySelectorAll('.btn-number'); // 숫자 버튼들
-    const operatorButtons = document.querySelectorAll('.btn-operator'); // 🚨🚨🚨 오타 수정 완료!
-    const equalsButton = document.querySelector('.btn-equals'); // = 버튼
-    const clearButton = document.querySelector('.btn-clear'); // C 버튼
+    // 계산기 기능 로직 (이전과 동일)
+    const calcDisplay = document.getElementById('calc-display'); 
+    const numberButtons = document.querySelectorAll('.btn-number'); 
+    const operatorButtons = document.querySelectorAll('.btn-operator'); 
+    const equalsButton = document.querySelector('.btn-equals'); 
+    const clearButton = document.querySelector('.btn-clear'); 
 
-    let currentInput = '0'; // 현재 입력 중인 숫자
-    let firstOperand = null; // 첫 번째 숫자
-    let operator = null; // 선택된 연산자
-    let waitingForSecondOperand = false; // 두 번째 숫자 입력을 기다리는 중인지 여부
+    let currentInput = '0'; 
+    let firstOperand = null; 
+    let operator = null; 
+    let waitingForSecondOperand = false; 
 
-    // 화면에 숫자 업데이트 함수 (단순화: currentInput만 표시)
     function updateDisplay() {
         calcDisplay.textContent = currentInput;
     }
 
-    // 숫자 버튼 클릭 시 처리
     function inputNumber(number) {
-        if (waitingForSecondOperand === true) { // 연산자 누르고 새 숫자 입력 시작
+        if (waitingForSecondOperand === true) { 
             currentInput = number;
             waitingForSecondOperand = false;
-        } else { // 계속해서 숫자 입력
-            if (number === '.' && currentInput.includes('.')) { // 소수점 중복 방지
-                return;
-            }
+        } else { 
+            if (number === '.' && currentInput.includes('.')) { return; }
             currentInput = currentInput === '0' && number !== '.' ? number : currentInput + number;
         }
         updateDisplay();
     }
 
-    // 연산자 버튼 클릭 시 처리 (단순화)
     function handleOperator(nextOperator) {
-        const inputValue = parseFloat(currentInput); // 현재 입력값을 숫자로 변환
+        const inputValue = parseFloat(currentInput); 
 
-        if (operator && waitingForSecondOperand) { // 연속 연산자 입력 시, 연산자만 변경
+        if (operator && waitingForSecondOperand) {
             operator = nextOperator;
             return;
         }
 
-        if (firstOperand === null) { // 첫 번째 숫자 입력
-            firstOperand = inputValue;
-        } else if (operator) { // 두 번째 숫자 입력 후 연산자 입력 (계산 수행)
+        if (firstOperand === null) { firstOperand = inputValue; } 
+        else if (operator) {
             const result = calculate(firstOperand, inputValue, operator);
-            currentInput = `${parseFloat(result.toFixed(7))}`; // 계산 결과를 현재 입력값으로 설정 (소수점 정리)
-            firstOperand = result; // 계산 결과를 다시 첫 번째 숫자로 설정
+            currentInput = `${parseFloat(result.toFixed(7))}`;
+            firstOperand = result;
         }
 
-        waitingForSecondOperand = true; // 다음은 두 번째 숫자 입력
-        operator = nextOperator; // 연산자 저장
+        waitingForSecondOperand = true;
+        operator = nextOperator;
         updateDisplay();
     }
 
-    // 실제 계산 수행 함수
     function calculate(first, second, op) {
         if (op === '+') return first + second;
         if (op === '-') return first - second;
         if (op === '*') return first * second;
         if (op === '/') {
-            if (second === 0) { // 0으로 나누기 방지
-                alert("0으로 나눌 수 없습니다.");
-                return first; // 계산 오류 시 첫 번째 피연산자 값을 유지
-            }
+            if (second === 0) { alert("0으로 나눌 수 없습니다."); return first; }
             return first / second;
         }
-        return second; // 오류 시 두 번째 숫자 반환
+        return second;
     }
 
-    // 초기화 함수 (C 버튼)
     function resetCalculator() {
         currentInput = '0';
         firstOperand = null;
@@ -87,37 +110,28 @@ export default async function main() {
         updateDisplay();
     }
 
-    // === 이벤트 리스너 연결 ===
     numberButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            inputNumber(event.target.dataset.number);
-        });
+        button.addEventListener('click', (e) => inputNumber(e.target.dataset.number));
     });
 
     operatorButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            handleOperator(event.target.dataset.operator);
-        });
+        button.addEventListener('click', (e) => handleOperator(e.target.dataset.operator));
     });
 
     equalsButton.addEventListener('click', () => {
-        if (firstOperand === null || operator === null) { // 첫 숫자나 연산자가 없으면 계산 안 함
-            return;
-        }
-        // = 버튼 누른 후, waitingForSecondOperand가 true라면 반복 연산 (ex: 5 + = 하면 5+5)
-        // 아니면 일반 계산 (ex: 5 + 3 = 하면 5+3)
+        if (firstOperand === null || operator === null) return;
+        
         const inputValue = waitingForSecondOperand ? firstOperand : parseFloat(currentInput);
         const result = calculate(firstOperand, inputValue, operator);
-        currentInput = `${parseFloat(result.toFixed(7))}`; 
+        currentInput = `${parseFloat(result.toFixed(7))}`;
         firstOperand = result;
-        
-        operator = null; // 계산 후 연산자 초기화
-        waitingForSecondOperand = true; // 다음 숫자 입력 대기 (현재 결과가 첫 번째 피연산자가 됨)
+
+        operator = null;
+        waitingForSecondOperand = true;
         updateDisplay();
     });
 
-    clearButton.addEventListener('click', () => resetCalculator()); // C 버튼 클릭 시 초기화
+    clearButton.addEventListener('click', resetCalculator);
 
-    // 초기 화면 업데이트
     updateDisplay();
 }

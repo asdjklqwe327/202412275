@@ -1,396 +1,481 @@
-* { /* '*' 표시는 html 문서 안의 모든 요소에 이 스타일을 적용하겠다는 의미 */
-  box-sizing: border-box; /*padding, border포함한 전체 크기*/
+/*
+도영아, 이건 `px` 대신 `rem`, `vw`, `clamp()` 함수를 사용해서
+브라우저 창 크기에 비례하여 모든 요소가 유연하게 변하도록 한 버전이야.
+모든 @media 쿼리는 제거되었어!
+*/
+
+/* --- 기본 설정 --- */
+html {
+    /* 이 부분이 핵심! 뷰포트 너비에 따라 루트 폰트 사이즈가 변하고, 모든 rem 단위에 영향 */
+    /* 최소 14px, 뷰포트 너비의 1.2% (권장값), 최대 18px */
+    font-size: clamp(0.875rem, 1.2vw, 1.125rem); /* 14px, 1.2vw, 18px */
+}
+* {
+    box-sizing: border-box; /* padding, border 포함한 전체 크기 */
 }
 body {
-  margin: 0; font-family: 'Noto Sans KR', sans-serif; background: white; color: #222;
+    margin: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    background: white;
+    color: #222;
 }
 a {
-  color: inherit; text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 button {
-  cursor: pointer; border: none; background: none;
+    cursor: pointer;
+    border: none;
+    background: none;
 }
-/* 전체 레이아웃: header + main + footer */
+
+/* --- 헤더 --- */
 header, footer {
-  width: 100%;
-  box-sizing: border-box;
+    width: 100%;
+    box-sizing: border-box;
 }
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 24px;
-  border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: clamp(0.625rem, 1vw, 0.75rem) clamp(1rem, 2vw, 1.5rem); /* 10px~12px, 16px~24px */
+    border-bottom: 1px solid #eee;
+    flex-wrap: wrap; /* 공간 부족 시 다음 줄로 */
+    gap: clamp(0.5rem, 1vw, 1rem); /* 헤더 요소들 간의 유동적인 간격 */
 }
-/* 헤더 왼쪽 */
 .header-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+    display: flex;
+    align-items: center;
+    gap: clamp(0.625rem, 1vw, 0.75rem); /* 10px~12px */
 }
 .icon-btn {
-  font-size: 24px;
-  user-select: none;
+    font-size: clamp(1.25rem, 2vw, 1.5rem); /* 20px~24px */
+    user-select: none;
 }
 .nav-icon {
-  font-size: 22px;
+    font-size: clamp(1.125rem, 1.8vw, 1.375rem); /* 18px~22px */
 }
-/* 네이버 로고 */
 .logo {
-  font-weight: 700;
-  font-size: 28px;
-  color: #03c75a;
-  user-select: none;
+    font-weight: 700;
+    font-size: clamp(1.5rem, 2.5vw, 1.75rem); /* 24px~28px */
+    color: #03c75a;
+    user-select: none;
 }
-/* 헤더 중앙 검색창 */
+
+/* --- 검색 컨테이너 --- */
 .search-container {
-  position: relative;
-  max-width: 600px;
-  flex-grow: 1;
-  margin: 0 20px;
+    flex-grow: 1;
+    max-width: clamp(25rem, 50vw, 37.5rem); /* 400px~600px, 50vw */
+    margin: clamp(0.625rem, 1vw, 1.25rem) auto; /* 10px~20px 상하 여백, 좌우 중앙 정렬 */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    order: 1; /* 헤더 요소들 중 중간에 위치 (좁아지면 위아래로 쌓임) */
+}
+.search-box {
+    width: 100%;
+    display: flex;
+    border: 1.5px solid #03c75a;
+    border-radius: clamp(1rem, 2vw, 1.375rem); /* 16px~22px 둥근 테두리 */
+    overflow: hidden;
 }
 input[type="search"] {
-  width: 100%;
-  padding: 8px 50px 8px 16px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 22px;
-  outline: none;
-  transition: border-color 0.3s ease;
+    flex-grow: 1;
+    border: none;
+    padding: clamp(0.75rem, 1.2vw, 1rem) clamp(1rem, 1.5vw, 1rem); /* 12px~16px 패딩 */
+    font-size: clamp(0.875rem, 1.1vw, 1rem); /* 14px~16px */
+    outline: none;
+    transition: border-color 0.3s ease;
 }
 input[type="search"]:focus {
-  border-color: #03c75a;
+    border-color: #03c75a;
 }
 .search-btn {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  border-radius: 50%;
-  background: #03c75a;
-  width: 36px; height: 36px;
-  display: flex; justify-content: center; align-items: center;
+    background-color: #03c75a;
+    border: none;
+    padding: 0 clamp(0.75rem, 1.2vw, 1rem); /* 12px~16px 패딩 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
 .search-btn svg {
-  fill: white;
-  width: 18px;
-  height: 18px;
+    stroke: white;
+    width: clamp(1.rem, 1.5vw, 1.125rem); /* 16px~18px */
+    height: clamp(1.rem, 1.5vw, 1.125rem); /* 16px~18px */
 }
-/* 헤더 오른쪽 아이콘들 */
+.icon-list {
+    width: 100%;
+    margin-top: clamp(0.75rem, 1.5vw, 1.25rem); /* 12px~20px */
+    display: flex;
+    justify-content: center;
+    gap: clamp(1rem, 2vw, 1.5rem); /* 16px~24px */
+    flex-wrap: wrap; /* 아이콘들이 공간 부족 시 다음 줄로 */
+}
+.icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    font-size: clamp(0.6875rem, 1vw, 0.8125rem); /* 11px~13px */
+    color: #555;
+}
+.icon-item img {
+    width: clamp(1.25rem, 1.8vw, 1.5rem); /* 20px~24px */
+    height: clamp(1.25rem, 1.8vw, 1.5rem); /* 20px~24px */
+    margin-bottom: clamp(0.25rem, 0.5vw, 0.375rem); /* 4px~6px */
+}
+.icon-item:hover {
+    color: #03c75a;
+}
 .header-right {
-  display: flex;
-  gap: 14px;
-  font-size: 22px;
-  color: #555;
+    display: flex;
+    gap: clamp(0.75rem, 1vw, 0.875rem); /* 12px~14px */
+    font-size: clamp(1.25rem, 1.5vw, 1.375rem); /* 20px~22px */
+    color: #555;
+    order: 3; /* 헤더 요소들 중 마지막에 위치 (좁아지면 제일 아래로) */
 }
 .header-right button:hover {
-  color: #03c75a;
+    color: #03c75a;
 }
-/* main 영역: 좌중우 레이아웃 */
+
+/* --- 메인 영역 --- */
 main {
-  display: flex;
-  max-width: 1200px;
-  margin: 20px auto;
-  gap: 20px;
-  padding: 0 20px;
-  box-sizing: border-box;
+    display: flex;
+    max-width: clamp(60rem, 90vw, 75rem); /* 960px~1200px */
+    margin: clamp(0.8rem, 2vw, 1.25rem) auto; /* 16px~20px 상하 여백 */
+    gap: clamp(1rem, 2vw, 1.25rem); /* 16px~20px 섹션 간 간격 */
+    padding: 0 clamp(1rem, 2vw, 1.25rem); /* 16px~20px 좌우 패딩 */
+    box-sizing: border-box;
+    flex-wrap: wrap; /* 좁아지면 콘텐츠와 사이드바가 다음 줄로 */
 }
-/* 가운데 컨텐츠 컬럼 */
 .content {
-  flex: 1.5;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+    flex: 1 1 clamp(20rem, 50vw, 40rem); /* 최소 320px~640px, 남는 공간 유동적 */
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 2vw, 1.25rem); /* 16px~20px 섹션 간 간격 */
 }
-/* 뉴스스탠드 */
+
+/* --- 뉴스 스탠드 섹션 --- */
 .news-stand {
-  background: white;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  padding: 16px;
+    background: white;
+    border-radius: clamp(0.5rem, 1vw, 0.625rem); /* 8px~10px */
+    border: 1px solid #ddd;
+    padding: clamp(0.75rem, 1.2vw, 1rem); /* 12px~16px */
+    container-type: inline-size;
+    container-name: news-widget;
 }
 .news-stand h2 {
-  margin: 0 0 12px 0;
-  font-weight: 600;
-  font-size: 18px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 6px;
-  color: #333;
+    margin: 0 0 clamp(0.625rem, 1vw, 0.75rem) 0; /* 10px~12px */
+    font-weight: 600;
+    font-size: clamp(1rem, 1.2vw, 1.125rem); /* 16px~18px */
+    border-bottom: 1px solid #eee;
+    padding-bottom: clamp(0.25rem, 0.5vw, 0.375rem); /* 4px~6px */
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: clamp(0.25rem, 0.5vw, 0.375rem); /* 메뉴와 제목 사이 간격 */
+}
+.news-menu {
+    display: flex;
+    gap: clamp(0.375rem, 0.6vw, 0.5rem); /* 6px~8px */
+}
+.news-menu-btn {
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: clamp(0.25rem, 0.5vw, 0.3125rem); /* 4px~5px */
+    padding: clamp(0.25rem, 0.5vw, 0.3125rem) clamp(0.5rem, 0.8vw, 0.625rem); /* 4px~5px, 8px~10px */
+    font-size: clamp(0.75rem, 0.8vw, 0.8125rem); /* 12px~13px */
+    color: #555;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;  
+}
+.news-menu-btn:hover {
+    background-color: #e0e0e0;
+    border-color: #ccc;
+}
+.news-menu-btn.active {                            
+    background-color: #03c75a;
+    border-color: #03c75a;
+    color: white;
+    font-weight: bold;
 }
 .news-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(6.25rem, 10vw, 7.5rem), 1fr)); /* 100px~120px */
+    gap: clamp(0.625rem, 1vw, 0.75rem); /* 10px~12px */
 }
-.news-list a {
-  flex: 1 1 32%;
-  background: #f9f9f9;
-  padding: 8px 10px;
-  border-radius: 6px;
-  font-size: 14px;
-  color: #036a07;
-  text-align: center;
-  border: 1px solid #d5e9d5;
-  user-select: none;
-  transition: background-color 0.2s ease;
-}
-.news-list a:hover {
-  background-color: #c5ebc2;
-}
-/* 전주대학교 */
-
-.my-image {
-  width: 200px;
-  height: auto;
-  object-fit: cover; /*이미지가 잘리더라도 영역을 꽉 채우도록*/  
+.news-item-card { /* 이제 a 태그 자체가 카드 형태의 아이템 */
+    background: #f9f9f9;
+    border-radius: clamp(0.25rem, 0.5vw, 0.375rem); /* 4px~6px */
+    border: 1px solid #d5e9d5;
+    user-select: none;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    
+    display: flex; /* 이미지와 제목을 세로로 배치하기 위해 Flexbox 사용 */
+    flex-direction: column;
+    align-items: center; /* 가로 중앙 정렬 */
+    overflow: hidden; /* 이미지나 텍스트가 넘치면 숨김 */
 }
 
+.news-item-card:hover {
+    background-color: #e0e0e0; /* 호버 시 배경색 변경 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 호버 시 그림자 효과 추가 */
+}
+
+.news-thumbnail { /* 뉴스 썸네일 이미지 */
+    width: 100%; /* 부모 아이템 너비에 꽉 차게 */
+    height: clamp(3.75rem, 6vw, 5rem); /* 60px~80px 고정 높이 */
+    object-fit: cover; /* 이미지가 잘리더라도 비율 유지하며 채움 */
+    border-bottom: 1px solid #eee; /* 이미지 하단에 구분선 */
+}
+
+.news-item-title { /* 뉴스 제목 텍스트 */
+    padding: clamp(0.375rem, 0.6vw, 0.5rem); /* 6px~8px 상하 패딩 */
+    font-size: clamp(0.75rem, 0.9vw, 0.875rem); /* 12px~14px */
+    color: #333; /* 제목 색상 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    line-height: 1.2;
+    word-break: keep-all; /* 단어 단위 줄바꿈 */
+    white-space: normal;
+    flex-grow: 1; /* 남은 공간을 차지하여 제목이 길어져도 안정적으로 보임 */
+    display: -webkit-box; /* 텍스트 넘침 처리 (2줄) */
+    -webkit-line-clamp: 2; /* 2줄까지만 표시 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+/* @container 쿼리로 news-stand 섹션 내부의 반응형 설정 */
+@container news-widget (max-width: 31.25rem) { /* 500px */
+    .news-list {
+        grid-template-columns: repeat(auto-fill, minmax(clamp(7.5rem, 15vw, 10rem), 1fr)); /* 120px~160px */
+    }
+}
+@container news-widget (max-width: 18.75rem) { /* 300px */
+    .news-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- 전주대학교 --- */
 .jju {
-  background: white;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  padding: 16px;
+    background: white;
+    border-radius: clamp(0.5rem, 1vw, 0.625rem); /* 8px~10px */
+    border: 1px solid #ddd;
+    padding: clamp(0.75rem, 1.2vw, 1rem); /* 12px~16px */
 }
 .jju h2 {
-  margin:0 0 12px;
-  font-size: 18px;
-  font-weight: 600;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 6px;
-  color: #333;
+    margin:0 0 clamp(0.625rem, 1vw, 0.75rem); /* 10px~12px */
+    font-size: clamp(1rem, 1.2vw, 1.125rem); /* 16px~18px */
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+    padding-bottom: clamp(0.25rem, 0.5vw, 0.375rem); /* 4px~6px */
+    color: #333;
 }
 .jju-items {
-  display: flex;
-  overflow-x: auto;
-  gap: 12px;
+    display: flex;
+    overflow-x: auto;
+    gap: clamp(0.625rem, 1vw, 0.75rem); /* 10px~12px */
+    flex-wrap: wrap;
 }
-
 .jju-item {
-  flex: 0 0 120px;
-  background: #f8f8f8;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  text-align: center;
-  padding: 10px;
-  font-size: 13px;
-  user-select: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+    flex: 1 0 clamp(7.5rem, 10vw, 8.75rem); /* 최소 120px~140px, 남는 공간 유동적 */
+    background: #f8f8f8;
+    border-radius: clamp(0.25rem, 0.5vw, 0.375rem); /* 4px~6px */
+    border: 1px solid #ddd;
+    text-align: center;
+    padding: clamp(0.5rem, 0.8vw, 0.625rem); /* 8px~10px */
+    font-size: clamp(0.75rem, 0.8vw, 0.8125rem); /* 12px~13px */
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.my-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: clamp(0.25rem, 0.5vw, 0.375rem); /* 4px~6px */
+    margin-bottom: clamp(0.25rem, 0.5vw, 0.375rem); /* 4px~6px */
 }
 
-.btn-clear img {
-  width: 100%; border-radius: 6px;
-  margin-bottom: 6px;
-}
-/* 추천 콘텐츠 */
+/* --- 추천 콘텐츠 --- */
 .recommend {
-  background: white;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  padding: 16px;
+    background: white;
+    border-radius: clamp(0.5rem, 1vw, 0.625rem); /* 8px~10px */
+    border: 1px solid #ddd;
+    padding: clamp(0.75rem, 1.2vw, 1rem); /* 12px~16px */
 }
 .recommend h2 {
-  margin:0 0 12px;
-  font-size: 18px;
-  font-weight: 600;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 6px;
-  color: #333;
+    margin:0 0 clamp(0.625rem, 1vw, 0.75rem); /* 10px~12px */
+    font-size: clamp(1rem, 1.2vw, 1.125rem); /* 16px~18px */
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+    padding-bottom: clamp(0.25rem, 0.5vw, 0.375rem); /* 4px~6px */
+    color: #333;
 }
 .recommend-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(9.375rem, 15vw, 12.5rem), 1fr)); /* 최소 150px~200px */
+    gap: clamp(0.75rem, 1.2vw, 0.875rem); /* 12px~14px */
 }
 .recommend-item {
-  background: #f8f8f8;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  font-size: 14px;
-  user-select: none;
+    background: #f8f8f8;
+    border-radius: clamp(0.25rem, 0.5vw, 0.375rem); /* 4px~6px */
+    overflow: hidden;
+    box-shadow: 0 clamp(0.125rem, 0.25vw, 0.3125rem) clamp(0.3125rem, 0.5vw, 0.3125rem) rgba(0,0,0,0.05); /* 2px 5px */
+    font-size: clamp(0.75rem, 0.9vw, 0.875rem); /* 12px~14px */
+    user-select: none;
 }
 .recommend-item img {
-  width: 100%;
-  height: 100px;
-  object-fit: cover;
+    width: 100%;
+    height: clamp(5rem, 8vw, 6.25rem); /* 80px~100px */
+    object-fit: cover;
 }
 .recommend-item p {
-  margin: 8px;
-  line-height: 1.2;
+    margin: clamp(0.5rem, 0.8vw, 0.625rem); /* 8px~10px */
+    line-height: 1.2;
 }
-/* 오른쪽 사이드바 */
+
+/* --- 오른쪽 사이드바 --- */
 aside.sidebar {
-  flex: 0.75;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  min-width: 280px;
+    flex: 1 1 clamp(17.5rem, 25vw, 20rem); /* 최소 280px~320px, 남는 공간 유동적 */
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 2vw, 1.25rem); /* 16px~20px */
 }
-/* 로그인 박스 */
+
+/* --- 로그인 박스 --- */
 .login-box {
-  border: 1px solid #03c75a;
-  border-radius: 8px;
-  padding: 20px;
-  text-align: center;
+    border: 1px solid #03c75a;
+    border-radius: clamp(0.5rem, 1vw, 0.625rem); /* 8px~10px */
+    padding: clamp(1rem, 2vw, 1.25rem); /* 16px~20px */
+    text-align: center;
 }
 .login-box h3 {
-  margin-top: 0;
-  font-size: 18px;
-  font-weight: 700;
-  color: #03c75a;
+    margin-top: 0;
+    font-size: clamp(1rem, 1.2vw, 1.125rem); /* 16px~18px */
+    font-weight: 700;
+    color: #03c75a;
 }
 .login-box button {
-  margin-top: 12px;
-  width: 100%;
-  padding: 10px 0;
-  border-radius: 22px;
-  background-color: #03c75a;
-  color: white;
-  font-weight: 700;
+    margin-top: clamp(0.625rem, 1vw, 0.75rem); /* 10px~12px */
+    width: 100%;
+    padding: clamp(0.5rem, 0.8vw, 0.625rem) 0; /* 8px~10px */
+    border-radius: clamp(1rem, 2vw, 1.375rem); /* 16px~22px */
+    background-color: #03c75a;
+    color: white;
+    font-weight: 700;
 }
 .login-box p {
-  margin-top: 10px;
-  font-size: 12px;
+    margin-top: clamp(0.5rem, 0.8vw, 0.625rem); /* 8px~10px */
+    font-size: clamp(0.625rem, 0.75vw, 0.75rem); /* 10px~12px */
 }
 .login-box p a {
-  color: #03c75a;
-  margin: 0 6px;
+    color: #03c75a;
+    margin: 0 clamp(0.25rem, 0.5vw, 0.375rem); /* 4px~6px */
 }
-/* 광고, 날씨, 주가 등 */
+
+/* --- 정보 박스 (광고, 날씨, 주가 등) --- */
 .info-box {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background: white;
-  padding: 16px;
-  font-size: 14px;
-  user-select: none;
+    border: 1px solid #ddd;
+    border-radius: clamp(0.5rem, 1vw, 0.625rem); /* 8px~10px */
+    background: white;
+    padding: clamp(0.75rem, 1.2vw, 1rem); /* 12px~16px */
+    font-size: clamp(0.75rem, 0.9vw, 0.875rem); /* 12px~14px */
+    user-select: none;
 }
 .info-box h4 {
-  margin: 0 0 10px;
-  font-weight: 600;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 6px;
+    margin: 0 0 clamp(0.5rem, 0.8vw, 0.625rem); /* 8px~10px */
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+    padding-bottom: clamp(0.25rem, 0.5vw, 0.375rem); /* 4px~6px */
 }
 
+/* --- 계산기 섹션 --- */
+.calculator-box h4 {
+    margin-bottom: clamp(0.75rem, 1.2vw, 0.9375rem); /* 12px~15px */
+}
+.calculator-display {
+    background-color: #eee;
+    color: #333;
+    font-size: clamp(1.5rem, 2.5vw, 2.5rem); /* 24px~40px */
+    padding: clamp(0.625rem, 1vw, 0.75rem) clamp(0.9375rem, 1.5vw, 1.125rem); /* 10px~15px */
+    border-radius: clamp(0.25rem, 0.5vw, 0.375rem); /* 4px~6px */
+    text-align: right;
+    margin-bottom: clamp(0.75rem, 1.2vw, 0.9375rem); /* 12px~15px */
+    min-height: clamp(2rem, 3vw, 2.5rem); /* 32px~40px */
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: 1.5;
+}
+.calculator-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(0.375rem, 0.6vw, 0.5rem); /* 6px~8px */
+}
+.calc-btn {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: clamp(0.25rem, 0.5vw, 0.375rem); /* 4px~6px */
+    padding: clamp(0.75rem, 1.2vw, 0.9375rem) 0; /* 12px~15px */
+    font-size: clamp(0.9rem, 1.2vw, 1.1em); /* 14px~17px */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    user-select: none;
+}
+.calc-btn:hover {
+    background-color: #e0e0e0;
+    border-color: #ccc;
+}
+.btn-operator {
+    background-color: #d8f1e0;
+    color: #03c75a;
+}
+.btn-operator:hover {
+    background-color: #c5ebc2;
+}
+.btn-plus {
+    grid-row: span 2;
+}
+.btn-equal {
+    grid-row: span 2;
+    background-color: #03c75a;
+    color: white;
+}
+.btn-equal:hover {
+    background-color: #02b050;
+}
+.btn-zero {
+    grid-column: span 2;
+}
+.btn-clear {
+    background-color: #f7a097;
+    color: white;
+}
+.btn-clear:hover {
+    background-color: #eb7c71;
+}
+
+/* --- 푸터 --- */
 footer {
-  padding: 20px 16px;
-  font-size: 12px;
-  color: #888;
-  border-top: 1px solid #eee;
-  text-align: center;
+    padding: clamp(1rem, 2vw, 1.25rem) clamp(1rem, 2vw, 1rem); /* 16px~20px */
+    font-size: clamp(0.625rem, 0.75vw, 0.75rem); /* 10px~12px */
+    color: #888;
+    border-top: 1px solid #eee;
+    text-align: center;
 }
 
+/* --- 스크롤바 커스텀 --- */
 .jju-items::-webkit-scrollbar {
-  height: 8px;
+    height: clamp(0.375rem, 0.5vw, 0.5rem); /* 6px~8px */
 }
 .jju-items::-webkit-scrollbar-thumb {
-  background-color: #b0d5a4;
-  border-radius: 4px;
+    background-color: #b0d5a4;
+    border-radius: clamp(0.125rem, 0.25vw, 0.25rem); /* 2px~4px */
 }
 .jju-items::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-/* 💡 계산기 스타일 추가 (초기 상태) */
-.calculator-box {
-  /* info-box에 이미 border와 background가 있으니 여기선 추가하지 않아도 돼 */
-}
-
-.calculator-box h4 {
-  margin-bottom: 15px; /* 타이틀 아래 간격 넓히기 */
-}
-
-.calculator-display {
-  background-color: #eee;
-  color: #333;
-  font-size: 2em;
-  padding: 10px 15px;
-  border-radius: 6px;
-  text-align: right;
-  margin-bottom: 15px; /* 원래대로 15px로 복원 */
-  min-height: 40px; /* 너무 짧아지지 않도록 최소 높이 설정 */
-  overflow: hidden; /* 숫자 넘치면 숨김 */
-  white-space: nowrap; /* 숫자가 길어져도 줄바꿈되지 않게 */
-  line-height: 1.5; /* 텍스트가 중앙에 오도록 */
-}
-
-.calculator-buttons {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4열로 버튼 배치 */
-  gap: 8px; /* 버튼 간격 */
-}
-
-.calc-btn {
-  background-color: #f0f0f0;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 15px 0;
-  font-size: 1.1em;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
-  user-select: none; /* 드래그 방지 */
-}
-
-.calc-btn:hover {
-  background-color: #e0e0e0;
-  border-color: #ccc;
-}
-
-.btn-operator {
-  background-color: #d8f1e0; /* 연한 초록색 */
-  color: #03c75a;
-}
-
-.btn-operator:hover {
-  background-color: #c5ebc2;
-}
-
-/* 💡 레이아웃 조정을 위한 특정 버튼 스타일 */
-.btn-plus { /* '+' 버튼이 세로로 2칸을 차지하도록 */
-  grid-row: span 2;
-  /* (색상은 btn-operator를 따름) */
-}
-
-.btn-equal { /* '=' 버튼이 세로로 2칸을 차지하도록 */
-  grid-row: span 2;
-  background-color: #03c75a; /* 네이버 메인 색상 */
-  color: white;
-}
-
-.btn-equal:hover {
-  background-color: #02b050;
-}
-
-.btn-zero { /* '0' 버튼이 가로로 2칸을 차지하도록 */
-  grid-column: span 2;
-}
-
-.btn-clear {
-  background-color: #f7a097; /* 클리어 버튼은 붉은 계열 */
-  color: white;
-}
-
-.btn-clear:hover {
-  background-color: #eb7c71;
-}
-
-@media (max-width: 1024px) {
-  main {
-    flex-direction: column;
-    padding: 0 10px;
-  }
-  aside.sidebar {
-    flex: unset;
-    width: 100%;
-    order: 1;
-  }
-  .content {
-    order: 2;
-  }
-  .recommend-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    background: transparent;
 }

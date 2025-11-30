@@ -5,25 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>네이버 클론 페이지</title>
   <style>
-    @import url("./main.css");
+    @import url("./main.css"); /* main.css 파일 연결 */
   </style>
 </head>
 <body>
   <header>
+    <!-- 헤더 왼쪽 영역: 메뉴 아이콘, 네이버 로고 -->
     <div class="header-left"> 
       <button class="icon-btn" aria-label="메뉴 열기">≡</button>
       <div class="logo" aria-label="네이버 홈">N</div>
     </div>
 
+    <!-- 헤더 중앙 영역: 검색창과 하단 아이콘 리스트 -->
     <div class="search-container">
-      <input type="search" class="search-input" placeholder="네이버에서 검색" aria-label="검색어 입력" />
-      <button class="search-btn" aria-label="검색">
-        <svg viewBox="0 0 24 24">
-          <path d="M21 20l-5.59-5.59A7.97 7.97 0 0016 10a8 8 0 10-8 8 7.97 7.97 0 004.41-1.59L20 21z"/>
-        </svg>
-      </button>
-    </div>
+      <!-- 둥근 형태의 검색창 -->
+      <div class="search-box">
+        <input type="search" class="search-input" placeholder="네이버에서 검색" aria-label="검색어 입력" />
+        <button class="search-btn" aria-label="검색">
+          <!-- 돋보기 아이콘 (SVG) -->
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+        </button>
+      </div>
 
+      <!-- 검색창 하단 아이콘 리스트 (메일, 카페, 블로그 등) -->
+      <div class="icon-list" role="list" aria-label="빠른 링크">
+        <a href="#" class="icon-item" role="listitem" aria-label="메일">
+          <img src="mail-icon.png" alt="메일" />
+          <span>메일</span>
+        </a>
+        <a href="#" class="icon-item" role="listitem" aria-label="카페">
+          <img src="cafe-icon.png" alt="카페" />
+          <span>카페</span>
+        </a>
+        <a href="#" class="icon-item" role="listitem" aria-label="블로그">
+          <img src="blog-icon.png" alt="블로그" />
+          <span>블로그</span>
+        </a>
+        <!-- 필요하면 여기에 더 많은 아이콘을 추가할 수 있습니다 -->
+      </div>
+    </div>
+    
+    <!-- 헤더 오른쪽 영역: 쪽지, 알림, 장바구니 아이콘 (복구 완료!) -->
     <div class="header-right">
       <button class="nav-icon" aria-label="쪽지">✉️</button>
       <button class="nav-icon" aria-label="알림">🔔</button>
@@ -34,54 +59,115 @@
   <main>
     <div class="content">
 
+      <!-- 뉴스 스탠드 섹션 -->
       <section class="news-stand" aria-label="뉴스 스탠드">
-        <h2>뉴스 스탠드</h2>
-        <div class="news-list">
-          <a href="https://www.yna.co.kr/" target="_blank">연합뉴스</a>
-          <a href="https://ichannela.com/" target="_blank">채널A</a>
-          <a href="https://www.munhwa.com/" target="_blank">문화일보</a>
-          <a href="https://www.hankyung.com/" target="_blank">한국경제</a>
-          <a href="https://www.news1.kr/" target="_blank">뉴스1</a>
-          <a href="https://www.sportsseoul.com/" target="_blank">스포츠서울</a>
-          <a href="https://www.inews24.com/" target="_blank">아이뉴스24</a>
-          <a href="https://www.mt.co.kr/" target="_blank">머니투데이</a>
-          <a href="https://newsstand.naver.com/?list=ct1&pcode=047" target="_blank">스탠드뉴스</a>
+        <!-- 뉴스 스탠드 타이틀 및 메뉴 버튼 (종합/스포츠) -->
+        <h2 class="news-title">
+          뉴스 스탠드
+          <div class="news-menu">
+            <button class="news-menu-btn active" data-news-type="general">종합</button>
+            <button class="news-menu-btn" data-news-type="sports">스포츠</button>
+            <button class="news-menu-btn" data-news-type="entertainment"> 엔터 </button>
+          </div>
+        </h2>
+
+        <!-- 종합 뉴스 목록 -->
+        <div class="news-list news-list-general">
+          <a href="https://www.yna.co.kr/" target="_blank" class="news-item-card">
+            <img src="yonhap.png" alt="연합뉴스 썸네일" class="news-thumbnail" />
+            <span class="news-item-title">연합뉴스</span>
+          </a>
+          <a href="https://ichannela.com/" target="_blank" class="news-item-card">
+            <img src="https://via.placeholder.com/150x80/27ae60/ffffff?text=ChA" alt="채널A 썸네일" class="news-thumbnail" />
+            <span class="news-item-title">채널A</span>
+          </a>
+          <a href="https://www.munhwa.com/" target="_blank" class="news-item-card">
+            <img src="https://via.placeholder.com/150x80/f39c12/ffffff?text=MH" alt="문화일보 썸네일" class="news-thumbnail" />
+            <span class="news-item-title">문화일보</span>
+          </a>
+          <a href="https://www.hankyung.com/" target="_blank" class="news-item-card">
+            <img src="https://via.placeholder.com/150x80/8e44ad/ffffff?text=HK" alt="한국경제 썸네일" class="news-thumbnail" />
+            <span class="news-item-title">한국경제</span>
+          </a>
+          <a href="https://www.news1.kr/" target="_blank" class="news-item-card">
+            <img src="https://via.placeholder.com/150x80/c0392b/ffffff?text=N1" alt="뉴스1 썸네일" class="news-thumbnail" />
+            <span class="news-item-title">뉴스1</span>
+          </a>
+          <a href="https://www.sportsseoul.com/" target="_blank" class="news-item-card">
+            <img src="https://via.placeholder.com/150x80/d35400/ffffff?text=SS" alt="스포츠서울 썸네일" class="news-thumbnail" />
+            <span class="news-item-title">스포츠서울</span>
+          </a>
+          <a href="https://www.inews24.com/" target="_blank" class="news-item-card">
+            <img src="https://via.placeholder.com/150x80/2c3e50/ffffff?text=iN24" alt="아이뉴스24 썸네일" class="news-thumbnail" />
+            <span class="news-item-title">아이뉴스24</span>
+          </a>
+          <a href="https://www.mt.co.kr/" target="_blank" class="news-item-card">
+            <img src="https://via.placeholder.com/150x80/16a085/ffffff?text=MT" alt="머니투데이 썸네일" class="news-thumbnail" />
+            <span class="news-item-title">머니투데이</span>
+          </a>
+          <a href="https://newsstand.naver.com/?list=ct1&pcode=047" target="_blank" class="news-item-card">
+            <img src="https://via.placeholder.com/150x80/34495e/ffffff?text=NS" alt="네이버뉴스 썸네일" class="news-thumbnail" />
+            <span class="news-item-title">네이버 뉴스스탠드</span>
+          </a>
         </div>
+
+        <!-- 스포츠 뉴스 목록 (초기에는 숨김) -->
+        <div class="news-list news-list-sports" style="display: none;">
+          <a href="https://sports.news.naver.com/kfootball/index" target="_blank">네이버 축구</a>
+          <a href="https://sports.news.naver.com/kbaseball/index" target="_blank">네이버 야구</a>
+          <a href="https://sports.news.naver.com/basketball/index" target="_blank">네이버 농구</a>
+          <a href="https://sports.news.naver.com/volleyball/index" target="_blank">네이버 배구</a>
+          <a href="https://sports.news.naver.com/esports/index" target="_blank">네이버 E스포츠</a>
+          <a href="https://sports.news.naver.com/general/index" target="_blank">네이버 일반</a>
+          <a href="https://www.sportskr.com/" target="_blank">스포츠 한국</a>
+          <a href="https://www.sportsseoul.com/" target="_blank">스포츠 서울</a>
+        </div>
+        <!--엔터 뉴스 -->
+          <div class="news-list news-list-entertainment" style="display: none;">
+          <a href="https://entertain.naver.com/home" target="_blank">네이버 연예</a>
+          <a href="https://entertain.naver.com/star" target="_blank">스타 뉴스</a>
+          <a href="https://entertain.naver.com/tv" target="_blank">TV 리포트</a>
+          <a href="https://entertain.naver.com/movie" target="_blank">영화 뉴스</a>
+          <a href="https://entertain.naver.com/music" target="_blank">음악 뉴스</a>
+          <a href="https://www.dispatch.co.kr/" target="_blank">디스패치</a>
+          <a href="https://www.sportskhan.net/" target="_blank">스포츠 경향</a>
+          <a href="https://www.sportsworldi.com/" target="_blank">스포츠월드</a>
+        </div>
+
       </section>
 
+      <!-- JJU (전주대학교) 섹션 -->
       <section class="jju" aria-label="전주대학교">
         <h2>전주대학교</h2>
         <div class="jju-items">
           <div class="jju-item">
-            <a href="https://www.jj.ac.kr/jj/index.do" target="_blank">
-              <img src="jjulogo.png" alt="전주대학교" class="my-image">
+            <a href="https://www.jj.ac.kr/jj/index.do" target="_blank" rel="noopener noreferrer">
+              <img src="jjulogo.png" alt="전주대학교" class="my-image" />
             </a>
             <p>전주대학교</p>
           </div>
-
           <div class="jju-item">
-            <a href="https://cyber.jj.ac.kr/" target="_blank">
-              <img src="cyber.png" alt="전주대학교 사이버캠퍼스" class="my-image"/>
+            <a href="https://cyber.jj.ac.kr/" target="_blank" rel="noopener noreferrer">
+              <img src="cyber.png" alt="사이버 캠퍼스" class="my-image" />
             </a>
-            <p>사이버 캠퍼스</p>
+            <p>전주대 사이버 캠퍼스</p>
           </div>
-
           <div class="jju-item">
-            <a href="https://instar.jj.ac.kr/" target="_blank">
-              <img src="jju-instar.png" alt="전주대학교 인스타" class="my-image">
+            <a href="https://instar.jj.ac.kr/" target="_blank" rel="noopener noreferrer">
+              <img src="jju-instar.png" alt="전주대 인스타" class="my-image" />
             </a>
-            <p>전주대학교<br>인스타</p>
+            <p>전주대 인스타</p>
           </div>
-
           <div class="jju-item">
-            <a href="https://onstar.jj.ac.kr/" target="_blank">
-              <img src="jju-onstar.png" alt="전주대학교온스타" class="my-image">
+            <a href="https://onstar.jj.ac.kr/" target="_blank" rel="noopener noreferrer">
+              <img src="jju-onstar.png" alt="전주대 온스타" class="my-image" />
             </a>
-            <p>전주대학교<br>온스타</p>
+            <p>전주대 온스타</p>
           </div>
         </div>
       </section>
 
+      <!-- 추천 콘텐츠 섹션 -->
       <section class="recommend" aria-label="추천 콘텐츠">
         <h2>추천 콘텐츠</h2>
         <div class="recommend-list">
@@ -104,7 +190,9 @@
 
     </div>
 
+    <!-- 사이드바 영역 -->
     <aside class="sidebar" aria-label="사이드바">
+      <!-- 로그인 박스 -->
       <div class="login-box" role="region" aria-labelledby="login-title">
         <h3 id="login-title">네이버 로그인</h3>
         <button class="login-btn">로그인</button>
@@ -113,52 +201,55 @@
         </p>
       </div>
 
+      <!-- 광고 배너 -->
       <div class="info-box" aria-label="광고 배너">
         <h4>광고</h4>
         <p>~~~~~~~~</p>
       </div>
 
+      <!-- 날씨 정보 -->
       <div class="info-box" aria-label="날씨 정보">
         <h4>날씨</h4>
         <p>현재 7℃ 맑음</p>
         <p>10시 12시 14시 ~</p>
       </div>
-      
-         <!-- 💡 계산기 부분 (초기 상태) -->
+
+      <!-- 계산기 섹션 -->
       <div class="calculator-box info-box" aria-label="계산기">
-  <h4>계산기</h4>
-  <div id="calc-display" class="calculator-display">0</div>
-  <div class="calculator-buttons">
-    <!-- 1행 -->
-    <button class="calc-btn btn-clear">C</button>
-    <button class="calc-btn btn-operator" data-operator="/">/</button>
-    <button class="calc-btn btn-operator" data-operator="*">*</button>
-    <button class="calc-btn btn-operator" data-operator="-">-</button>
+        <h4>계산기</h4>
+        <div id="calc-display" class="calculator-display">0</div>
+        <div class="calculator-buttons">
+          <!-- 1행 -->
+          <button class="calc-btn btn-clear">C</button>
+          <button class="calc-btn btn-operator" data-operator="/">/</button>
+          <button class="calc-btn btn-operator" data-operator="*">*</button>
+          <button class="calc-btn btn-operator" data-operator="-">-</button>
 
-    <!-- 2행 -->
-    <button class="calc-btn btn-number" data-number="7">7</button>
-    <button class="calc-btn btn-number" data-number="8">8</button>
-    <button class="calc-btn btn-number" data-number="9">9</button>
-    <button class="calc-btn btn-operator btn-plus" data-operator="+">+</button> <!-- + 버튼에 btn-plus 클래스 추가 -->
+          <!-- 2행 -->
+          <button class="calc-btn btn-number" data-number="7">7</button>
+          <button class="calc-btn btn-number" data-number="8">8</button>
+          <button class="calc-btn btn-number" data-number="9">9</button>
+          <button class="calc-btn btn-operator btn-plus" data-operator="+">+</button>
 
-    <!-- 3행 -->
-    <button class="calc-btn btn-number" data-number="4">4</button>
-    <button class="calc-btn btn-number" data-number="5">5</button>
-    <button class="calc-btn btn-number" data-number="6">6</button>
-    <!-- 여기에 + 버튼의 공간이 비어있음 (CSS에서 rowspan으로 처리) -->
+          <!-- 3행 -->
+          <button class="calc-btn btn-number" data-number="4">4</button>
+          <button class="calc-btn btn-number" data-number="5">5</button>
+          <button class="calc-btn btn-number" data-number="6">6</button>
+          <!-- ( + 버튼이 2칸 차지하므로 이 칸은 비워둡니다. CSS grid로 처리) -->
 
-    <!-- 4행 -->
-    <button class="calc-btn btn-number" data-number="1">1</button>
-    <button class="calc-btn btn-number" data-number="2">2</button>
-    <button class="calc-btn btn-number" data-number="3">3</button>
-    <button class="calc-btn btn-equals btn-equal" data-operator="=">=</button> <!-- = 버튼에 btn-equal 클래스 추가 -->
+          <!-- 4행 -->
+          <button class="calc-btn btn-number" data-number="1">1</button>
+          <button class="calc-btn btn-number" data-number="2">2</button>
+          <button class="calc-btn btn-number" data-number="3">3</button>
+          <button class="calc-btn btn-equals btn-equal" data-operator="=">=</button>
+          <!-- ( = 버튼이 2칸 차지하므로 이 칸은 비워둡니다. CSS grid로 처리) -->
 
-    <!-- 5행 -->
-    <button class="calc-btn btn-number btn-zero" data-number="0">0</button> <!-- 0 버튼에 btn-zero 클래스 추가 -->
-    <button class="calc-btn btn-number btn-decimal" data-number=".">.</button>
-    <!-- 여기에 = 버튼의 공간이 비어있음 (CSS에서 rowspan으로 처리) -->
-  </div>
-</div>
+          <!-- 5행 -->
+          <button class="calc-btn btn-number btn-zero" data-number="0">0</button>
+          <button class="calc-btn btn-number btn-decimal" data-number=".">.</button>
+          <!-- ( = 버튼이 2칸 차지하므로 이 칸은 비워둡니다. CSS grid로 처리) -->
+        </div>
+      </div>
     </aside>
   </main>
 
